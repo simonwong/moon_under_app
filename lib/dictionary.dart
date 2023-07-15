@@ -1,0 +1,2 @@
+
+const appName = 'Moon Under';
