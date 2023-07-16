@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:moon_under/models/my_app_state.dart';
+import 'package:moon_under/models/moon_under_state.dart';
 
 class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    print('build FavoritesPage');
+
+    var appState = context.watch<MoonUnderState>();
 
     if (appState.favorites.isEmpty) {
       return Center(

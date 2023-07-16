@@ -1,43 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'models/moon_under_state.dart';
+import 'package:moon_under/pages/white_noise.dart';
+import 'package:moon_under/pages/generator_page.dart';
+import 'package:moon_under/pages/favorites_page.dart';
+
 import 'dictionary.dart';
-import 'models/my_app_state.dart';
-import 'navigation.dart';
-import 'pages/favorites_page.dart';
-import 'pages/generator_page.dart';
-import 'pages/white_noise.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MoonUnder());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MoonUnder extends StatelessWidget {
+  const MoonUnder({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
+      create: (context) => MoonUnderState(),
       child: MaterialApp(
         title: appName,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: MyHomePage(),
+        home: HomePage(),
       ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   var screenIndex = 0;
   late bool showNavigationDrawer;
@@ -46,10 +46,15 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       screenIndex = selectedScreen;
     });
+    closeDrawer();
   }
 
   void openDrawer() {
     scaffoldKey.currentState!.openEndDrawer();
+  }
+
+  void closeDrawer() {
+    scaffoldKey.currentState!.closeEndDrawer();
   }
 
   @override
@@ -72,32 +77,40 @@ class _MyHomePageState extends State<MyHomePage> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          body: Container(
-            color: Theme.of(context).colorScheme.primaryContainer,
-            child: page,
-          ),
+          key: scaffoldKey,
+          body: page,
           endDrawer: NavigationDrawer(
             onDestinationSelected: handleScreenChanged,
             selectedIndex: screenIndex,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-                child: Text(
-                  'Header',
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-              ),
-              ...destinations.map(
-                (ExampleDestination destination) {
-                  return NavigationDrawerDestination(
-                    label: Text(destination.label),
-                    icon: destination.icon,
-                    selectedIcon: destination.selectedIcon,
-                  );
-                },
+              NavigationDrawerDestination(
+                label: Text('白噪音'),
+                icon: Icon(Icons.tsunami_outlined),
+                selectedIcon: Icon(Icons.tsunami),
               ),
               const Padding(
-                padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+                padding: const EdgeInsets.fromLTRB(28, 10, 28, 10),
+                child: Divider(),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(28, 10, 28, 16),
+                child: Text(
+                  'Demo',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              NavigationDrawerDestination(
+                label: Text('单词'),
+                icon: Icon(Icons.text_fields_outlined),
+                selectedIcon: Icon(Icons.text_fields),
+              ),
+              NavigationDrawerDestination(
+                label: Text('单词收藏'),
+                icon: Icon(Icons.favorite_outline),
+                selectedIcon: Icon(Icons.favorite),
+              ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(28, 10, 28, 10),
                 child: Divider(),
               ),
             ],

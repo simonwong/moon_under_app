@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:moon_under/models/my_app_state.dart';
+import 'package:moon_under/models/moon_under_state.dart';
 import 'package:moon_under/components/big_card.dart';
 
 class GeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    print('build GeneratorPage');
+
+    var appState = context.watch<MoonUnderState>();
     var pair = appState.current;
 
     IconData icon;
