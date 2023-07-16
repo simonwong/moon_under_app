@@ -1,2 +1,1 @@
-
 const appName = 'Moon Under';

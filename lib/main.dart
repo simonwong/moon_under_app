@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,15 +19,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => MyAppState(),
-        child: MaterialApp(
-          title: appName,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: MyHomePage(),
-        ));
+      create: (context) => MyAppState(),
+      child: MaterialApp(
+        title: appName,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: MyHomePage(),
+      ),
+    );
   }
 }
 
@@ -69,39 +69,41 @@ class _MyHomePageState extends State<MyHomePage> {
         throw UnimplementedError('no widget for $screenIndex');
     }
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return Scaffold(
-        body: Container(
-          color: Theme.of(context).colorScheme.primaryContainer,
-          child: page,
-        ),
-        endDrawer: NavigationDrawer(
-          onDestinationSelected: handleScreenChanged,
-          selectedIndex: screenIndex,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-              child: Text(
-                'Header',
-                style: Theme.of(context).textTheme.titleSmall,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          body: Container(
+            color: Theme.of(context).colorScheme.primaryContainer,
+            child: page,
+          ),
+          endDrawer: NavigationDrawer(
+            onDestinationSelected: handleScreenChanged,
+            selectedIndex: screenIndex,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+                child: Text(
+                  'Header',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
               ),
-            ),
-            ...destinations.map(
-              (ExampleDestination destination) {
-                return NavigationDrawerDestination(
-                  label: Text(destination.label),
-                  icon: destination.icon,
-                  selectedIcon: destination.selectedIcon,
-                );
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
-              child: Divider(),
-            ),
-          ],
-        ),
-      );
-    });
+              ...destinations.map(
+                (ExampleDestination destination) {
+                  return NavigationDrawerDestination(
+                    label: Text(destination.label),
+                    icon: destination.icon,
+                    selectedIcon: destination.selectedIcon,
+                  );
+                },
+              ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+                child: Divider(),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

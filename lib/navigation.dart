@@ -9,7 +9,19 @@ class ExampleDestination {
 }
 
 const List<ExampleDestination> destinations = <ExampleDestination>[
-  ExampleDestination('WhiteNoisePage', Icon(Icons.favorite_outline), Icon(Icons.favorite)),
-  ExampleDestination('Home', Icon(Icons.home_outlined), Icon(Icons.home)),
-  ExampleDestination('Favorites', Icon(Icons.favorite_outline), Icon(Icons.favorite)),
+  ExampleDestination(
+    'WhiteNoisePage',
+    Icon(Icons.favorite_outline),
+    Icon(Icons.favorite),
+  ),
+  ExampleDestination(
+    'Home',
+    Icon(Icons.home_outlined),
+    Icon(Icons.home),
+  ),
+  ExampleDestination(
+    'Favorites',
+    Icon(Icons.favorite_outline),
+    Icon(Icons.favorite),
+  ),
 ];

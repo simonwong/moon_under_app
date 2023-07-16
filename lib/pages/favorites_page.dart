@@ -14,18 +14,20 @@ class FavoritesPage extends StatelessWidget {
       );
     }
 
-    return ListView(children: [
-      Padding(
-        padding: const EdgeInsets.all(20),
-        child: Text('You have '
-            '${appState.favorites.length} favorites:'),
-      ),
-      ...appState.favorites
-          .map((pair) => ListTile(
-                leading: Icon(Icons.favorite),
-                title: Text(pair.asLowerCase),
-              ))
-          .toList(),
-    ]);
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Text('You have '
+              '${appState.favorites.length} favorites:'),
+        ),
+        ...appState.favorites
+            .map((pair) => ListTile(
+                  leading: Icon(Icons.favorite),
+                  title: Text(pair.asLowerCase),
+                ))
+            .toList(),
+      ],
+    );
   }
 }
